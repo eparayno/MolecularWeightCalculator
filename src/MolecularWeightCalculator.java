@@ -10,7 +10,7 @@ public class MolecularWeightCalculator {
         File fileName = new File("src/MassData.txt");
         Scanner massData = new Scanner(fileName);
         Map<String, Double> massMap = new HashMap<>();
-        while(massData.hasNext()){
+        while (massData.hasNext()) {
             String symbol = massData.next();
             Double mass = Double.valueOf(massData.next());
             massMap.put(symbol, mass);
@@ -18,7 +18,6 @@ public class MolecularWeightCalculator {
         Scanner input = new Scanner(System.in);
         System.out.print("Enter molecule: ");
         String molecule = input.next();
-
         calculateMass(molecule, massMap);
     }
 
@@ -34,7 +33,7 @@ public class MolecularWeightCalculator {
             } else if (c.chars().allMatch(Character::isDigit)) {
                 int multiplier = Integer.valueOf(c);
                 String prevChar = String.valueOf(molecule.charAt(i-1));
-                if(prevChar.equals(")")) {
+                if (prevChar.equals(")")) {
                     for (String element: elementCounter.keySet()) {
                         elementCounter.put(element, elementCounter.get(element)* multiplier);
                     }
