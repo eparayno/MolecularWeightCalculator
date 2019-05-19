@@ -3,10 +3,14 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class MolecularWeightCalculator {
+    static Stack<String> groups = new Stack<>();
+    static Map<String, Integer> elementCounter = new HashMap<>();
+    static Map<String, Double> massMap = new HashMap<>();
+    static double totalMass = 0.00000;
+
     public static void main(String[] args) throws FileNotFoundException {
         File fileName = new File("src/MassData.txt");
         Scanner massData = new Scanner(fileName);
-        Map<String, Double> massMap = new HashMap<>();
         while (massData.hasNext()) {
             String symbol = massData.next();
             Double mass = Double.valueOf(massData.next());
@@ -15,20 +19,21 @@ public class MolecularWeightCalculator {
         Scanner input = new Scanner(System.in);
         System.out.print("Enter molecule: ");
         String molecule = input.next();
-        calculateMass(molecule, massMap);
+        calculateMass(molecule);
+        System.out.println("Molecular weight: "+ totalMass + " g/mol");
     }
 
-    public static void calculateMass(String molecule, Map<String, Double> massMap) {
-        Stack<String> groups = new Stack<>();
-        Map<String, Integer> elementCounter = new HashMap<>();
+    static void calculateMass(String molecule) {
         String prevElement = "";
         for (int i = 0; i < molecule.length(); i++) {
             String c = String.valueOf(molecule.charAt(i));
             char nextChar = '$';
-            if (i < molecule.length()-1) {
+            if (i < molecule.length() - 1) {
                 nextChar = molecule.charAt(i + 1);
             }
             if (c.equals("(")) {
+                updateMass();
+                elementCounter.clear();
                 groups.push(c);
             } else if (c.equals(")")) {
                 groups.pop();
@@ -59,12 +64,18 @@ public class MolecularWeightCalculator {
                 prevElement = c;
             }
         }
-        System.out.println(elementCounter);
-        Double totalMass = 0.00000;
+        updateMass();
+    }
+
+    static void updateMass(){
+        Double mass = 0.00000;
         for (String element : elementCounter.keySet()) {
-            totalMass += elementCounter.get(element) * massMap.get(element);
+            mass += elementCounter.get(element) * massMap.get(element);
         }
-        System.out.println("Molecular weight: " + totalMass + " g/mol");
+        if(!elementCounter.isEmpty()) {
+            System.out.println(elementCounter);
+        }
+        totalMass += mass;
     }
 }
 
