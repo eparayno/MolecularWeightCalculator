@@ -2,7 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class MolecularWeightCalculator {
+public class main {
     static Stack<String> groups = new Stack<>();
     static Map<String, Integer> elementCounter = new HashMap<>();
     static Map<String, Double> massMap = new HashMap<>();
