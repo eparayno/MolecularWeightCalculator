@@ -21,7 +21,7 @@ You may open your IDE and click "Open Project".
 You may also run on your terminal: 
 Change directory to the directory containing mwCalcMain.java
 ```
-$ java mwCalcMain.java
+$ java main.java
 ```
 
 ### Instructions
