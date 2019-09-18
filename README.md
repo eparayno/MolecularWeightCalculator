@@ -27,5 +27,5 @@ $ java main.java
 ### Instructions
 Current version is limited to multiplier of two digits. Must write molecule without charges or states of matter. Otherwise, follow conventions on writing chemical formulas. 
 
-##Author(s)
+## Author(s)
 - Erika Parayno
